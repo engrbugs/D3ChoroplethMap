@@ -19,7 +19,7 @@
   </head>
   <style>
     body {
-      background-image: #fff;
+      background-color: #141E28;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -31,50 +31,36 @@
     h1 {
       font-family: "Montserrat", sans-serif;
       font-size: larger;
-      margin: -40px 0 12px;
-      color: #222f3e;
+      margin: 0;
+      margin-top: 20px;
+      color: #fff;
+      padding: 0;
     }
-
+    h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: medium;
+      font-weight: 400;
+      margin: 0;
+      margin-bottom: 20px;
+      color: #fff;
+      padding: 0;
+    }
     svg {
       border-radius: 4px;
       text-align: left;
-      border: 2px solid salmon;
+      margin-top: 10px;
     }
 
-    .legend {
-      position: absolute;
-      text-align: right;
-      top: 20%;
-      right: 15%;
-      font-family: sans-serif;
-      font-size: 14px;
-      padding: 20px;
+    path:hover {
+      fill: #ee5253;
+      stroke: #1dd1a1;
+      stroke-width: 3;
+      stroke-linejoin: "round";
+      stroke-linecap: "round";
     }
 
-    .legend .text {
-      margin: 10px;
-      position: relative;
-      min-width: 200px;
-      padding-right: 30px;
-    }
-
-    .legend .box {
-      display: inline-block;
-      /* background-color: orange; */
-      height: 20px;
-      width: 20px;
-      border-radius: 4px;
-      position: absolute;
-      top: -3px;
-      right: 0;
-    }
-
-    .legend .box.no-doping {
-      background-color: #54a0ff;
-    }
-
-    .legend .box.doping {
-      background-color: #ff6b6b;
+    #legend {
+      margin-top: 10px;
     }
 
     .tooltip {
@@ -93,10 +79,12 @@
       color: whitesmoke;
       opacity: 0.9;
     }
+
+
   </style>
   <body>
     <h1 id="title">US Education Attainment</h1>
-    <h3 id="description">gwapo gwapo ako</h3>
+    <h3 id="description">Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)</h3>
 
     <div id="container" class="container">
       <div id="tooltip" class="tooltip"></div>
