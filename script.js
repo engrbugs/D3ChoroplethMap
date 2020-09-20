@@ -19,6 +19,9 @@ async function run() {
   const path = d3.geoPath();
   const data = topojson.feature(counties, counties.objects.counties).features;
 
+  const colorScale = d3.scaleThreshold()
+    
+
   var svg = d3
     .select("#container")
     .append("svg")
@@ -27,11 +30,13 @@ async function run() {
 
   svg.append('g')
     .selectAll('path')  
-    .attr('class', 'county')
     .data(data)
     .enter()
     .append('path')
+    .attr('class', 'county')
     .attr('fill', 'black')
+    .attr('data-fips', d => d.id)
+    .attr('data-education', d => educations.find(edu => edu.fips === d.id).bachelorsOrHigher)
     .attr('d', path)
     .on("mousemove", (d, item) => {
       console.log(d, item,item.id);
@@ -40,7 +45,7 @@ async function run() {
       const education = educations.find(edu => edu.fips === item.id);
       console.log(education.bachelorsOrHigher);
       tooltip.innerHTML = 
-      `${education.area_name}, ${education.state} - ${education.bachelorsOrHigher}%`;
+      `${education.area_name}, ${education.state} ${education.bachelorsOrHigher}%`;
       console.log(education);
       tooltip.setAttribute("data-education", education.bachelorsOrHigher);
     })
