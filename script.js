@@ -19,9 +19,12 @@ async function run() {
   const path = d3.geoPath();
   const data = topojson.feature(counties, counties.objects.counties).features;
 
-  const colorScale = d3.scaleThreshold()
-    
-
+  const colorScale =  d3.scaleThreshold()
+  .domain(d3.range(d3.min(educations, edu => edu.bachelorsOrHigher), 
+  d3.max(educations, edu => edu.bachelorsOrHigher), 
+  (d3.max(educations, edu => edu.bachelorsOrHigher)-d3.min(educations, edu => edu.bachelorsOrHigher))/8))
+  .range(d3.schemeBlues[9]);
+  
   var svg = d3
     .select("#container")
     .append("svg")
@@ -34,7 +37,7 @@ async function run() {
     .enter()
     .append('path')
     .attr('class', 'county')
-    .attr('fill', 'black')
+    .attr('fill', d => colorScale(educations.find(edu => edu.fips === d.id).bachelorsOrHigher))
     .attr('data-fips', d => d.id)
     .attr('data-education', d => educations.find(edu => edu.fips === d.id).bachelorsOrHigher)
     .attr('d', path)
