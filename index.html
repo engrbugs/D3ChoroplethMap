@@ -6,7 +6,7 @@
     <title>Visualize Data with a Scatterplot Graph</title>
     <link
       rel="icon"
-      href="https://img.icons8.com/emoji/48/000000/syringe-emoji.png"
+      href="https://img.icons8.com/dotty/80/000000/education.png"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap"
@@ -38,6 +38,7 @@
     svg {
       border-radius: 4px;
       text-align: left;
+      border: 2px solid salmon;
     }
 
     .legend {
@@ -94,8 +95,13 @@
     }
   </style>
   <body>
-    <h1 id="title">Doping VS. Non-Doping in Professional Bicycle Racing</h1>
-    <div id="tooltip" class="tooltip"></div>
+    <h1 id="title">US Education Attainment</h1>
+    <h3>gwapo gwapo ako</h3>
+
+    <div id="container" class="container">
+      <div id="tooltip" class="tooltip"></div>
+    </div>
+    
     <div id="legend" class="legend">
       <div class="text">
         No Doping Allegations
@@ -109,6 +115,11 @@
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"
+      integrity="sha512-4UKI/XKm3xrvJ6pZS5oTRvIQGIzZFoXR71rRBb1y2N+PbwAsKa5tPl2J6WvbEvwN3TxQCm8hMzsl/pO+82iRlg=="
       crossorigin="anonymous"
     ></script>
     <script
