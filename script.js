@@ -1,4 +1,5 @@
 const tooltip = document.getElementById("tooltip");
+const colorLength = 9;
 
 async function run() {
   console.log('run');
@@ -18,12 +19,19 @@ async function run() {
 
   const path = d3.geoPath();
   const data = topojson.feature(counties, counties.objects.counties).features;
+  const steps = (d3.max(educations, edu => edu.bachelorsOrHigher)-d3.min(educations, edu => edu.bachelorsOrHigher))/(colorLength-1);
 
   const colorScale =  d3.scaleThreshold()
   .domain(d3.range(d3.min(educations, edu => edu.bachelorsOrHigher), 
   d3.max(educations, edu => edu.bachelorsOrHigher), 
-  (d3.max(educations, edu => edu.bachelorsOrHigher)-d3.min(educations, edu => edu.bachelorsOrHigher))/8))
-  .range(d3.schemeBlues[9]);
+  steps))
+  .range(d3.schemeBlues[colorLength]);
+
+  var colors = [];
+
+  for (let i=d3.min(educations, edu => edu.bachelorsOrHigher); i<=d3.max(educations, edu => edu.bachelorsOrHigher); i+=steps) {
+    colors.push(colorScale(i));
+  }
   
   var svg = d3
     .select("#container")
@@ -55,7 +63,25 @@ async function run() {
     .on("mouseover", () => (tooltip.style.visibility = "visible"))
     .on("mouseout", () => (tooltip.style.visibility = "hidden"));
 
-
+    const legendWidth = 200;
+    const legendHeight = 50;
+  
+    const legendRectWidth = legendWidth / colors.length;
+    const legend = d3
+      .select("#container")
+      .append("svg")
+      .attr("id", "legend")
+      .attr("width", legendWidth)
+      .attr("height", legendHeight)
+      .selectAll("rect")
+      .data(colors)
+      .enter()
+      .append("rect")
+      .attr("x", (_, i) => i * legendRectWidth)
+      .attr("y", 0)
+      .attr("width", legendRectWidth)
+      .attr("height", 25)
+      .attr("fill", (c) => c);
 
 };
 
